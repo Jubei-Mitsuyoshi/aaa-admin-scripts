@@ -1,50 +1,95 @@
-#!/bin/bash
 
+#!/bin/bash
 
 ################ common header identical except for usage, getopts etc #########################################################################################################
 shopt -s extglob
 
+cd "$HOME"
+
 Usage() {
   cat <<EOF
-usage: ${0##*/} [options]
+usage: ${0##*/} [options] </path/to/pkg/dir>
 
-  -c | --clean remove all symlinks,restore
-  backups
-  
+   -n < list of blacklisted repo names >
+   -n < will not download or build these repo
+   names >
+   
+   -c < clone all gits from selected github page >
+   
+   
+  This script performs various git admin actions
   
 
 EOF
 }
+
+
 
 if [[ $1 = @(-h|--help) ]]; then
   Usage
   exit 1
 fi
 
-while getopts 'c' arg; do
-	case "$arg" in
-		c|--clean) clean_up="yes" ;;
-	esac
-done
-
-if [[ $clean_up == yes ]]; then
-	cd aaa-env
-	./aaa-linkup -c
-	cd ..
-	cd aaa-build-scripts
-	./aaa-linkup -c
-	cd ..
-#	cd aaa-admin-scripts_*
-#	./aaa-linkup -c
-#	cd ..
+#source common functions
+if [[ -r /usr/bin/aaa-common-functions ]]; then
+	. /usr/bin/aaa-common-functions
+	if [[ ! $? -eq 0 ]]; then
+		echo " failed to source common functions at /usr/bin/aaa-common-functions"
+		echo "quitting !! "
+		exit 1
+	fi
 else
-	cd aaa-env
-	./aaa-linkup
-	cd ..
-	cd aaa-build-scripts
-	./aaa-linkup
-	cd ..
-#	cd aaa-admin-scripts_*
-#	./aaa-linkup
-#	cd ..
+	echo " failed to find common functions at /usr/bin/aaa-common-functions"
+	echo "quitting !! "
+	exit 1
+fi
+
+#source config
+if [ -r /etc/aaa-master-config ]; then
+  Info "found my master config file.. reading it"
+  . /etc/aaa-master-config
+	if [ -r $HOME/.aaa-local-config ]; then
+		Info "found a local settings file.. reading it"
+		. $HOME/.aaa-local-config
+	fi
+else
+	Fuck "Failed to find master config file quitting"
+	exit 1
+fi
+
+#source settings
+if [ -r $HOME/.aaa_settings ]; then
+  Info "found a settings file.. reading it"
+  . $HOME/.aaa_settings
+fi
+
+# get options and arguments http://wiki.bash-hackers.org/howto/getopts_tutorial
+
+while getopts ":lc" opt; do
+  case $opt in
+    n) Info "< -d $OPTARG > passed" 
+		blacklist="$OPTARG" ;;
+	l) list=1 ;;
+	c) clone=1 ;;
+	l) add_to_home_repo=1 ;;
+	g) add_to_git_repo=1 ;;
+	w) add_to_work_repo=1 ;;
+   \?) Fuck "Invalid option: -$OPTARG" ;;
+    :) Fuck "Option -$OPTARG requires a distro name, kali,stable,unstable,testing or ubuntu" ;;
+  esac
+done
+#shift the options and args out the way http://wiki.bash-hackers.org/howto/getopts_tutorial
+shift $((OPTIND-1))
+#and lets parse it
+
+
+if [[ $list -eq 1 ]]; then
+	lynx -dump -listonly https://github.com/$1?tab=repositories | grep 'stargazers' | sed -r 's/^.{6}//' | sed 's/\/stargazers//' || Fuck "lynx failed to get list, either internet glitch or nonexistant gihub account name passed "
+	exit 0
+fi
+
+if [[ $list -eq 1 ]]; then
+	
+	lynx -dump -listonly https://github.com/$1?tab=repositories | grep 'stargazers' | sed -r 's/^.{6}//' | sed 's/\/stargazers//' || Fuck "lynx failed to get list, either internet glitch or nonexistant gihub account name passed "
+	exit 0
 fi
