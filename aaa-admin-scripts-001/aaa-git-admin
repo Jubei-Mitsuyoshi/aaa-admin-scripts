@@ -14,7 +14,8 @@ usage: ${0##*/} [options] </path/to/pkg/dir>
    -n < will not download or build these repo
    names >
    
-   -c < clone all gits from selected github page >
+   -c < clone all gits from selected github page
+    to the current dir >
    
    
   This script performs various git admin actions
@@ -81,6 +82,8 @@ done
 #shift the options and args out the way http://wiki.bash-hackers.org/howto/getopts_tutorial
 shift $((OPTIND-1))
 #and lets parse it
+owner_name="$1"
+shift
 
 
 if [[ $list -eq 1 ]]; then
@@ -88,8 +91,10 @@ if [[ $list -eq 1 ]]; then
 	exit 0
 fi
 
-if [[ $list -eq 1 ]]; then
-	
-	lynx -dump -listonly https://github.com/$1?tab=repositories | grep 'stargazers' | sed -r 's/^.{6}//' | sed 's/\/stargazers//' || Fuck "lynx failed to get list, either internet glitch or nonexistant gihub account name passed "
+if [[ $clone -eq 1 ]]; then
+	for repo_url in `lynx -dump -listonly https://github.com/$1?tab=repositories | grep 'stargazers' | sed -r 's/^.{6}//' | sed 's/\/stargazers//'`; do
+		repo_name=$(sed "s/https:\/\/github.com\/$owner_name\///" $repo_url)
+		InList $repo_name $1 && Test git clone "$repo_url".git
+	done
 	exit 0
 fi
