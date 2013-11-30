@@ -1,0 +1,22 @@
+function FreshInstall()
+{
+
+apt-get update
+#apt-get dist-upgrade
+/etc/init.d/gdm3 stop > /dev/null 2>&1
+apt-get --no-upgrade --no-install-recommends install xinit
+apt-get --no-upgrade purge gdm3
+apt-get --no-upgrade purge "gnome-settings-daemon*"
+apt-get --no-upgrade purge "gnome-session*"
+apt-get --no-upgrade --no-install-recommends  install "cinnamon*" "muffin*" "cjs*" "nemo*"
+
+Info "chose muffin here in the next dialog"
+update-alternatives --config x-window-manager
+
+Info "chose cinnamon-session in the next dialog"
+update-alternatives --config x-session-manager
+
+
+Info "now type startx"
+}
+
