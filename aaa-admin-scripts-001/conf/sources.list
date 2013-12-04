@@ -1338,7 +1338,7 @@ deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 ###########################
 
 deb http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
-# deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
+deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
 
 
 ###########################
