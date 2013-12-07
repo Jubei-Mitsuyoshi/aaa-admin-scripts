@@ -112,5 +112,8 @@ fi
 #custom paths and defs
 export CHROOT=$HOME/ArchDevChroot
 export ARCHDEV=$CHROOT/root
+export PATH=${PATH}:/usr/share/android-sdk/tools
+export PATH=${PATH}:/usr/share/android-sdk/platform-tools
+
 
 export DEBEMAIL="Jubei Mitsuyoshi <jubei.house.of.five.masters@gmail.com>"

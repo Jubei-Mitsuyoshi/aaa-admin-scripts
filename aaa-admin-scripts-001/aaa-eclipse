@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#download eclipse
+
+#copy desktop file to /usr/share/applications
+#copy icon to /usr/share/icons
+
+#android
+
+#rename /sdk/adb to adb.sdk, and fastboot
+#rename /etc/bin/adb to adb.debian, and fastboot
+
+update-alternatives --install /usr/bin/adb adb /usr/bin/adb.debian 60 --slave /usr/bin/fastboot fastboot /usr/bin/adb.debian
+update-alternatives --install /usr/bin/adb adb /usr/share/android-sdk/platform-tools/adb.sdk 40 --slave /usr/bin/fastboot fastboot /usr/share/android-sdk/platform-tools/fastboot.sdk
