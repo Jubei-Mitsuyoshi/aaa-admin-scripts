@@ -649,16 +649,16 @@
 # Siduction Repositories - the community based OS - http://packages.siduction.org/?Repositories
 # Download / Mirrors - http://siduction.org/index.php?module=inhalt&func=view&pid=2
 # siduction
-# deb http://packages.siduction.org/siduction unstable main contrib non-free
+#deb http://packages.siduction.org/siduction unstable main contrib non-free
 # deb-src http://packages.siduction.org/siduction unstable main contrib non-free
 # Community
-# deb http://packages.siduction.org/community unstable main contrib non-free
+#deb http://packages.siduction.org/community unstable main contrib non-free
 # deb-src http://packages.siduction.org/community unstable main contrib non-free
 # User
-# deb http://packages.siduction.org/user unstable main contrib non-free
+#deb http://packages.siduction.org/user unstable main contrib non-free
 # deb-src http://packages.siduction.org/user unstable main contrib non-free
 # Fixes
-# deb http://packages.siduction.org/fixes unstable main contrib non-free
+#deb http://packages.siduction.org/fixes unstable main contrib non-free
 # deb-src http://packages.siduction.org/fixes unstable main contrib non-free
 # Experimental
 # deb http://packages.siduction.org/experimental unstable main contrib non-free
@@ -1463,7 +1463,8 @@ deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
 
 
 
-
+deb ftp://ftp.spline.de/pub/siduction/base unstable main
+deb-src ftp://ftp.spline.de/pub/siduction/base unstable main 
 
 
 
