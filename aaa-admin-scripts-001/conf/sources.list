@@ -1462,9 +1462,7 @@ deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
 # deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
 
 
-
-deb ftp://ftp.spline.de/pub/siduction/base unstable main
-deb-src ftp://ftp.spline.de/pub/siduction/base unstable main 
+deb http://download.virtualbox.org/virtualbox/debian wheezy contrib
 
 
 
