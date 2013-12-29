@@ -1144,9 +1144,6 @@ deb-src http://http.kali.org/kali kali main non-free contrib
 deb http://security.kali.org/kali-security kali/updates main contrib non-free
 deb-src http://security.kali.org/kali-security kali/updates main contrib non-free
 
-#wheezy backports
-deb http://ftp.dk.debian.org/debian wheezy-backports main contrib non-free
-#deb-src http://ftp.dk.debian.org/debian wheezy-backports main contrib non-free
 
 ###########################
 ## OFFICIAL DEBIAN REPOS #
@@ -1165,15 +1162,15 @@ deb http://ftp.dk.debian.org/debian wheezy-backports main contrib non-free
 ####################
 # Debian sid FAQ - http://wiki.debian.org/DebianUnstable#FAQ
 deb http://ftp.dk.debian.org/debian unstable main contrib non-free
-#deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
+deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
 
 ###################
 ## Debian jessie ##
 ###################
- deb http://ftp.dk.debian.org/debian testing main contrib non-free
+# deb http://ftp.dk.debian.org/debian testing main contrib non-free
 # deb-src http://ftp.dk.debian.org/debian testing main contrib non-free
 
- deb http://security.debian.org/ jessie/updates main contrib non-free
+# deb http://security.debian.org/ jessie/updates main contrib non-free
 # deb-src http://security.debian.org/ jessie/updates main contrib non-free
 
 
@@ -1207,7 +1204,7 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 # deb-src http://dk.archive.ubuntu.com/ubuntu/ saucy main restricted universe multiverse
 
 ###### Ubuntu Partner Repo
-# deb http://archive.canonical.com/ubuntu saucy partner
+#deb http://archive.canonical.com/ubuntu saucy partner
 # deb-src http://archive.canonical.com/ubuntu saucy partner
 
 ###### Ubuntu Extras Repo
@@ -1237,6 +1234,10 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 ###### Ubuntu Partner Repo
 # deb http://archive.canonical.com/ubuntu raring partner
 # deb-src http://archive.canonical.com/ubuntu raring partner
+
+###### Ubuntu Extras Repo
+#deb http://extras.ubuntu.com/ubuntu raring main
+# deb-src http://extras.ubuntu.com/ubuntu raring main
 
 
 
@@ -1293,7 +1294,7 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 ###########################
 ## Smartgit #
 ###########################
-#deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
+deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 # deb-src http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 
 
@@ -1317,7 +1318,7 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 # deb-src http://ppa.launchpad.net/linaro-maintainers/staging-overlay/ubuntu raring main
 
 ########################Linaro tools###################################
- deb http://ppa.launchpad.net/linaro-maintainers/tools/ubuntu raring main
+# deb http://ppa.launchpad.net/linaro-maintainers/tools/ubuntu raring main
 # deb-src http://ppa.launchpad.net/linaro-maintainers/tools/ubuntu raring main
 
 ########################Linaro Toolchain Backports###################################
@@ -1358,12 +1359,6 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 # Repo for building packages from sources that aren't in the normal Debian repos
 # deb-src http://mentors.debian.net/debian unstable
 
-#############
-## most recent cuda ##
-#############
-#deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1210/x86_64 /
-# deb-src http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1204/x86_64 /
-
 
 #############
 ## gambas 3,5 ##
@@ -1393,22 +1388,17 @@ deb http://ftp.dk.debian.org/debian unstable main contrib non-free
 #############
 ## Time Shift selene ##
 #############
- deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
-# deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
+deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
+deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
 
 
 
-# XFCE4.10 xfcenext (amd64 / i386 )
- deb http://packages.siduction.org/xfcenext unstable main
-# deb-src http://packages.siduction.org/xfcenext unstable main
 
-############## End siduction repos ######################
-
-########  aptosid  ########
+########  aptosid  ########################################################
 # aptosid (the new sidux) http://aptosid.com/files/misc/sources.list.d/aptosid.list
 # Technical University Carolo-Wilhelmina at Brunswick, Germany
- deb http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
-# deb-src http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
+deb http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
+deb-src http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
 
 
 ########################## End aptosid repositories #######################
@@ -1424,4 +1414,68 @@ deb http://download.virtualbox.org/virtualbox/debian wheezy contrib
 ## ANDROID STUDIO ##
 #############
 deb http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
+deb-src http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
+
+
+############## Start siduction repos ######################
+
+#base (amd64 / i386)
+
+deb http://packages.siduction.org/base unstable main contrib non-free 
+deb-src http://packages.siduction.org/base unstable main contrib non-free 
+
+#extra (amd64 / i386)
+
+
+deb http://packages.siduction.org/extra unstable main contrib non-free
+deb-src http://packages.siduction.org/extra unstable main contrib non-free  
+
+#user (amd64 / i386)
+
+
+deb http://packages.siduction.org/user unstable main contrib non-free
+deb-src http://packages.siduction.org/user unstable main contrib non-free
+
+#fixes (amd64 / i386)
+
+
+deb http://packages.siduction.org/fixes unstable main contrib non-free
+deb-src http://packages.siduction.org/fixes unstable main contrib non-free
+
+#experimental (amd64 / i386)
+
+
+#deb http://packages.siduction.org/experimental unstable main contrib non-free
+#deb-src http://packages.siduction.org/experimental unstable main contrib non-free
+
+#razorqt (amd64 / i386)
+
+deb http://packages.siduction.org/razorqt unstable main
+deb-src http://packages.siduction.org/razorqt unstable main
+
+#razorqt next (amd64 / i386)
+
+deb http://packages.siduction.org/razorqt  next main
+deb-src http://packages.siduction.org/razorqt next main
+
+#xfcenext (amd64 / i386)
+
+deb http://packages.siduction.org/xfcenext unstable main
+deb-src http://packages.siduction.org/xfcenext unstable main
+
+
+############## End siduction repos ######################
+
+
+#############
+## liquorix kernel ##
+#############
+#deb http://liquorix.net/debian sid main
+
+
+#############
+## TPL ##
+#############
+deb http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
+deb-src http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
 

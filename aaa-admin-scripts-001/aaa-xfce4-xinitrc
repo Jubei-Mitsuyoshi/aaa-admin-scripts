@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# fix broken $UID on some system...
+if test "x$UID" = "x"; then
+  if test -x /usr/xpg4/bin/id; then
+    UID=`/usr/xpg4/bin/id -u`;
+  else
+    UID=`id -u`;
+  fi
+fi
+
+# set $XDG_MENU_PREFIX to "xfce-" so that "xfce-applications.menu" is picked
+# over "applications.menu" in all Xfce applications.
+export XDG_MENU_PREFIX="xfce-"
+
+
+# set DESKTOP_SESSION so that one can detect easily if an Xfce session is running
+export DESKTOP_SESSION="xfce"
+
+# $XDG_CONFIG_HOME defines the base directory relative to which user specific
+# configuration files should be stored. If $XDG_CONFIG_HOME is either not set
+# or empty, a default equal to $HOME/.config should be used.
+export XDG_CONFIG_HOME="$HOME/.config"
+[ -d "$XDG_CONFIG_HOME" ] || mkdir "$XDG_CONFIG_HOME"
+
+# $XDG_CACHE_HOME defines the base directory relative to which user specific
+# non-essential data files should be stored. If $XDG_CACHE_HOME is either not
+# set or empty, a default equal to $HOME/.cache should be used.
+
+export XDG_CACHE_HOME="$HOME/.cache"
+[ -d "$XDG_CACHE_HOME" ] || mkdir "$XDG_CACHE_HOME"
+
+
+# Modify libglade and glade environment variables so that
+# it will find the files installed by Xfce
+GLADE_CATALOG_PATH="$GLADE_CATALOG_PATH:"
+GLADE_PIXMAP_PATH="$GLADE_PIXMAP_PATH:"
+GLADE_MODULE_PATH="$GLADE_MODULE_PATH:"
+export GLADE_CATALOG_PATH
+export GLADE_PIXMAP_PATH
+export GLADE_MODULE_PATH
+
+# For now, start with an empty list
+XRESOURCES=""
+
+# Has to go prior to merging Xft.xrdb, as its the "Defaults" file
+test -r "/etc/xdg/xfce4/Xft.xrdb" && XRESOURCES="$XRESOURCES /etc/xdg/xfce4/Xft.xrdb"
+test -r $HOME/.Xdefaults && XRESOURCES="$XRESOURCES $HOME/.Xdefaults"
+
+BASEDIR=$XDG_CONFIG_HOME/xfce4
+if test -r "$BASEDIR/Xft.xrdb"; then
+  XRESOURCES="$XRESOURCES $BASEDIR/Xft.xrdb"
+elif test -r "$XFCE4HOME/Xft.xrdb"; then
+  mkdir -p "$BASEDIR"
+  cp "$XFCE4HOME/Xft.xrdb" "$BASEDIR"/
+  XRESOURCES="$XRESOURCES $BASEDIR/Xft.xrdb"
+fi
+
+# merge in X cursor settings
+test -r "$BASEDIR/Xcursor.xrdb" && XRESOURCES="$XRESOURCES $BASEDIR/Xcursor.xrdb"
+
+# ~/.Xresources contains overrides to the above
+test -r "$HOME/.Xresources" && XRESOURCES="$XRESOURCES $HOME/.Xresources"
+
+# load all X resources (adds /dev/null to avoid an empty list that would hang the process)
+cat /dev/null $XRESOURCES | xrdb -merge -
+
+# load local modmap
+test -r $HOME/.Xmodmap && xmodmap $HOME/.Xmodmap
+
+
+/usr/bin/xfce4-session
+
+exit 0

@@ -35,7 +35,7 @@ GRUB_DISABLE_RECOVERY="true"
 GRUB_SAVEDEFAULT="true"
 
 #background
-#GRUB_BACKGROUND="/boot/grub/grub2.png"
+GRUB_BACKGROUND="/boot/grub/grub2.png"
 
 #theme /overrules bakground
 #GRUB_THEME="/boot/grub/themes/axe/axe.
