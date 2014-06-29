@@ -1,0 +1,55 @@
+#!/bin/bash
+
+
+Usage() {
+  cat <<EOF
+usage: ${0##*/}
+
+EOF
+}
+
+if [[ $1 = @(-h|--help) ]]; then
+  Usage
+  exit 0
+fi
+
+#check eclipse bins present in default locations
+
+if [[ ! -e /usr/share/android-sdk/platform-tools/adb ]]; then
+	echo "/usr/share/android-sdk/platform-tools/adb not present"
+	exit 1
+fi
+
+if [[ ! -e /usr/share/android-sdk/platform-tools/fastboot ]]; then
+	echo "/usr/share/android-sdk/platform-tools/fastboot not present"
+	exit 1
+fi
+
+if [[ ! -e /usr/bin/adb ]]; then
+	echo "/usr/bin/adb not present"
+	exit 1
+fi
+
+if [[ ! -e /usr/bin/fastboot ]]; then
+	echo "/usr/bin/fastboot not present"
+	exit 1
+fi
+
+if [[ -e /usr/bin/adb.debian]]; then
+	echo "/usr/bin/adb.debian already prsent present"
+	exit 1
+fi
+
+
+#android
+
+#rename /sdk/adb to adb.sdk, and fastboot
+
+mv /usr/share/android-sdk/platform-tools/adb /usr/share/android-sdk/platform-tools/adb.sdk
+mv /usr/share/android-sdk/platform-tools/fastboot /usr/share/android-sdk/platform-tools/fastboot.sdk
+
+
+#rename /etc/bin/adb to adb.debian, and fastboot
+
+update-alternatives --install /usr/bin/adb adb /usr/bin/adb.debian 40 --slave /usr/bin/fastboot fastboot /usr/bin/adb.debian
+update-alternatives --install /usr/bin/adb adb /usr/share/android-sdk/platform-tools/adb.sdk 60 --slave /usr/bin/fastboot fastboot /usr/share/android-sdk/platform-tools/fastboot.sdk

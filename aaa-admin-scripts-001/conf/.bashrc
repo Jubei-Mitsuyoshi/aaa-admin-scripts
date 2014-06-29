@@ -112,8 +112,13 @@ fi
 #custom paths and defs
 export CHROOT=$HOME/ArchDevChroot
 export ARCHDEV=$CHROOT/root
+#adb tools
 export PATH=${PATH}:/usr/share/android-sdk/tools
 export PATH=${PATH}:/usr/share/android-sdk/platform-tools
+#android build env
+export PATH=$PATH:/root/bin
+#android kernel immage tools
+export PATH=$PATH:/opt/AndroidKerelImageTools
 
 
 export DEBEMAIL="Jubei Mitsuyoshi <jubei.house.of.five.masters@gmail.com>"

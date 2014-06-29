@@ -1161,8 +1161,8 @@ deb-src http://security.kali.org/kali-security kali/updates main contrib non-fre
 ## Debian sid ##
 ####################
 # Debian sid FAQ - http://wiki.debian.org/DebianUnstable#FAQ
-deb http://ftp.dk.debian.org/debian unstable main contrib non-free
-deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
+# deb http://ftp.dk.debian.org/debian unstable main contrib non-free
+# deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
 
 ###################
 ## Debian jessie ##
@@ -1172,6 +1172,12 @@ deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
 
 # deb http://security.debian.org/ jessie/updates main contrib non-free
 # deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+###################
+## Debian wheezy backports ##
+###################
+deb http://ftp.debian.org/debian wheezy-backports main contrib non-free
+# deb-src http://ftp.dk.debian.org/debian wheezy-backports main
 
 
 ###########################
@@ -1294,7 +1300,7 @@ deb-src http://ftp.dk.debian.org/debian unstable main contrib non-free
 ###########################
 ## Smartgit #
 ###########################
-deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
+#deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 # deb-src http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 
 
@@ -1302,8 +1308,8 @@ deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 ## ORACLE JAVA #
 ###########################
 
-#deb http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
-#deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu raring main
+deb http://ppa.launchpad.net/webupd8team/java/ubuntu saucy main
+#deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu saucy main
 
 
 ###########################
@@ -1388,8 +1394,8 @@ deb http://ppa.launchpad.net/eugenesan/ppa/ubuntu raring main
 #############
 ## Time Shift selene ##
 #############
-deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
-deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
+# deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
+# deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
 
 
 
@@ -1397,8 +1403,8 @@ deb-src http://ppa.launchpad.net/teejee2008/ppa/ubuntu trusty main
 ########  aptosid  ########################################################
 # aptosid (the new sidux) http://aptosid.com/files/misc/sources.list.d/aptosid.list
 # Technical University Carolo-Wilhelmina at Brunswick, Germany
-deb http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
-deb-src http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
+# deb http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
+# deb-src http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
 
 
 ########################## End aptosid repositories #######################
@@ -1407,40 +1413,41 @@ deb-src http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
 #############
 ## latest virual box ##
 #############
-deb http://download.virtualbox.org/virtualbox/debian wheezy contrib
+#wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+#deb http://download.virtualbox.org/virtualbox/debian wheezy contrib
 
 
 #############
 ## ANDROID STUDIO ##
 #############
-deb http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
-deb-src http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
+# deb http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
+# deb-src http://ppa.launchpad.net/neizod/ppa/ubuntu saucy main
 
 
 ############## Start siduction repos ######################
 
 #base (amd64 / i386)
 
-deb http://packages.siduction.org/base unstable main contrib non-free 
-deb-src http://packages.siduction.org/base unstable main contrib non-free 
+#deb http://packages.siduction.org/base unstable main contrib non-free 
+#deb-src http://packages.siduction.org/base unstable main contrib non-free 
 
 #extra (amd64 / i386)
 
 
-deb http://packages.siduction.org/extra unstable main contrib non-free
-deb-src http://packages.siduction.org/extra unstable main contrib non-free  
+#deb http://packages.siduction.org/extra unstable main contrib non-free
+#deb-src http://packages.siduction.org/extra unstable main contrib non-free  
 
 #user (amd64 / i386)
 
 
-deb http://packages.siduction.org/user unstable main contrib non-free
-deb-src http://packages.siduction.org/user unstable main contrib non-free
+#deb http://packages.siduction.org/user unstable main contrib non-free
+#deb-src http://packages.siduction.org/user unstable main contrib non-free
 
 #fixes (amd64 / i386)
 
 
-deb http://packages.siduction.org/fixes unstable main contrib non-free
-deb-src http://packages.siduction.org/fixes unstable main contrib non-free
+#deb http://packages.siduction.org/fixes unstable main contrib non-free
+#deb-src http://packages.siduction.org/fixes unstable main contrib non-free
 
 #experimental (amd64 / i386)
 
@@ -1450,18 +1457,18 @@ deb-src http://packages.siduction.org/fixes unstable main contrib non-free
 
 #razorqt (amd64 / i386)
 
-deb http://packages.siduction.org/razorqt unstable main
-deb-src http://packages.siduction.org/razorqt unstable main
+#deb http://packages.siduction.org/razorqt unstable main
+#deb-src http://packages.siduction.org/razorqt unstable main
 
 #razorqt next (amd64 / i386)
 
-deb http://packages.siduction.org/razorqt  next main
-deb-src http://packages.siduction.org/razorqt next main
+#deb http://packages.siduction.org/razorqt  next main
+#deb-src http://packages.siduction.org/razorqt next main
 
 #xfcenext (amd64 / i386)
 
-deb http://packages.siduction.org/xfcenext unstable main
-deb-src http://packages.siduction.org/xfcenext unstable main
+#deb http://packages.siduction.org/xfcenext unstable main
+#deb-src http://packages.siduction.org/xfcenext unstable main
 
 
 ############## End siduction repos ######################
@@ -1476,6 +1483,6 @@ deb-src http://packages.siduction.org/xfcenext unstable main
 #############
 ## TPL ##
 #############
-deb http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
-deb-src http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
+#deb http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
+#deb-src http://ppa.launchpad.net/linrunner/tlp/ubuntu saucy main
 

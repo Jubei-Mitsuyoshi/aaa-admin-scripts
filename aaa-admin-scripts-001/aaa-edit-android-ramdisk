@@ -1,0 +1,102 @@
+#!/bin/bash
+
+
+Usage() {
+  cat <<EOF
+usage: ${0##*/} [options] < name of boot.img fle.. defaults to boot.img> < name of file to edit defaults to init.rc >
+
+	-t < leave temp dirs on exit >
+	-x just recompress
+	-c do not recompress on exit
+ 
+EOF
+}
+
+
+
+if [[ $1 = @(-h|--help) ]]; then
+  Usage
+  exit 1
+fi
+
+#source common functions
+if [[ -r /usr/bin/aaa-common-functions ]]; then
+	. /usr/bin/aaa-common-functions
+	if [[ ! $? -eq 0 ]]; then
+		echo " failed to source common functions at /usr/bin/aaa-common-functions"
+		echo "quitting !! "
+		exit 1
+	fi
+else
+	echo " failed to find common functions at /usr/bin/aaa-common-functions"
+	echo "quitting !! "
+	exit 1
+fi
+
+
+# get options and arguments http://wiki.bash-hackers.org/howto/getopts_tutorial
+
+while getopts ":tcx" opt; do
+  case $opt in
+	t) no_clean=1 ;;
+	x) just_compress=1 ;;
+	c) if [[ $just_compress -eq 1 ]]; then
+			Info " -x passed, hence -c makes no sense "
+			exit 1
+		else
+			no_recompress=1
+		fi ;;
+	esac
+done
+
+
+
+#shift the options and args out the way http://wiki.bash-hackers.org/howto/getopts_tutorial
+shift $((OPTIND-1))
+
+image_name=${1:-boot.img}
+shift
+edit_target=${1:-init.rc}
+
+clean_up() {
+  
+rm -rf ramdisk
+rm -f bootimg.cfg
+rm -f initrd.img
+rm -f zImage
+
+}
+
+if [[ $just_compress -eq 1 ]]; then
+	cd ramdisk
+	find . | cpio -o -H newc | gzip > ../initrd.img
+	cd ..
+	abootimg --create "$image_name"_new -k zImage -r initrd.img
+	[[ $no_clean -eq 1 ]] || clean_up
+	exit 0
+fi
+
+
+abootimg -x "$image_name"
+
+
+mkdir ramdisk
+cp initrd.img ramdisk/initrd.gz
+cd ramdisk
+gunzip -c initrd.gz | cpio -i
+rm initrd.gz
+rm ../initrd.img
+
+nano "$edit_target"
+
+if [[ $no_recompress -eq 1 ]]; then
+	Info "-c passed not recompressing"
+else
+	find . | cpio -o -H newc | gzip > ../initrd.img
+	cd ..
+	abootimg --create "$image_name"_new.img" -k zImage -r initrd.img
+	[[ $no_clean -eq 1 ]] || clean_up
+fi
+
+
+exit 0

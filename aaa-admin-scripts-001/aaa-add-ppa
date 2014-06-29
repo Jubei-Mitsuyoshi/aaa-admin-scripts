@@ -1,4 +1,19 @@
 #!/bin/bash
+
+Usage() {
+  cat <<EOF
+usage: ${0##*/} [ubunturelease] [ppa:user/ppa-name]
+
+EOF
+}
+
+if [[ $1 = @(-h|--help) ]]; then
+  Usage
+  exit 1
+fi
+
+
+
 if [ $# -eq 2 ]
 NM=`uname -a && date`
 NAME=`echo $NM | md5sum | cut -f1 -d" "`
