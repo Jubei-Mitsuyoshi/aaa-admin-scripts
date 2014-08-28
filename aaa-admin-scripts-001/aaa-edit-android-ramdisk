@@ -94,7 +94,7 @@ if [[ $no_recompress -eq 1 ]]; then
 else
 	find . | cpio -o -H newc | gzip > ../initrd.img
 	cd ..
-	abootimg --create "$image_name"_new.img" -k zImage -r initrd.img
+	abootimg --create "$image_name"_new -k zImage -r initrd.img
 	[[ $no_clean -eq 1 ]] || clean_up
 fi
 
